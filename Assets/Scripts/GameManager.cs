@@ -5,6 +5,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     private static GameManager _instance;
+    private static InitiativeList _initiativeList;
 
     public static GameManager Instance
     {
