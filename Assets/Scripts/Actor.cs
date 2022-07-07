@@ -1,20 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
-public class Actor : MonoBehaviour
+public abstract class Actor : MonoBehaviour
 {
     MoveAction _moveAction;
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     private Vector2 CalcNextPosition()
     {
@@ -25,5 +16,23 @@ public class Actor : MonoBehaviour
     {
         _moveAction = new MoveAction(CalcNextPosition());
         _moveAction.Execute(this);
+    }
+
+    public void Act()
+    {
+        ActionList actions = new ActionList();
+        QueueActions(ref actions);
+        foreach (Action action in actions)
+        {
+            action.Invoke();
+        }
+    }
+
+    public virtual void QueueActions(ref ActionList actions)
+    {
+        actions.AddRangeAction(new List<Action>()
+        {
+            Move,
+        });
     }
 }

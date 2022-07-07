@@ -5,7 +5,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     private static GameManager _instance;
-    private static InitiativeList _initiativeList;
+    private InitiativeList _initiativeList;
 
     public static GameManager Instance
     {
@@ -21,8 +21,14 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public InitiativeList InitiativeList
+    {
+        get { return _initiativeList; }
+    }
+
     private void Awake()
     {
         _instance = this;
+        _initiativeList = new InitiativeList();
     }
 }
