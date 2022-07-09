@@ -5,7 +5,13 @@ using System;
 
 public abstract class Actor : MonoBehaviour
 {
+    ActorState _actorState;
     MoveAction _moveAction;
+
+    public void Start()
+    {
+        _actorState = new AwaitCommandActorState();    
+    }
 
     private Vector2 CalcNextPosition()
     {
