@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InitiativeList : MonoBehaviour
+public class InitiativeList
 {
     private CircularList<Actor> _list;
 

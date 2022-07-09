@@ -31,4 +31,12 @@ public class GameManager : MonoBehaviour
         _instance = this;
         _initiativeList = new InitiativeList();
     }
+
+    private void Update()
+    {
+        if (Input.GetMouseButtonDown(1))
+        {
+            Debug.Log(MouseManager.GetMousePosition());
+        }
+    }
 }
