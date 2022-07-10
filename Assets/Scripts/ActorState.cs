@@ -11,7 +11,7 @@ public abstract class ActorState
         _actor = actor;
     }
 
-    public virtual void OnActionKey()
+    public virtual void OnAction()
     {
         ThrowGeneralUnimplementedException();
     }
@@ -27,10 +27,10 @@ public class AwaitCommandActorState : ActorState
     public AwaitCommandActorState(Actor actor) : base(actor)
     { }
 
-    public override void OnActionKey()
+    public override void OnAction()
     {
         Vector2 mousePos = MouseManager.GetCenteredMousePosition();
-
+        _actor.Move(mousePos);
     }
 }
 
@@ -39,7 +39,7 @@ public class CannotActActorState : ActorState
     public CannotActActorState(Actor actor) : base(actor)
     { }
 
-    public override void OnActionKey()
+    public override void OnAction()
     {
 
     }
@@ -48,5 +48,11 @@ public class CannotActActorState : ActorState
 public class DeadActorState : ActorState
 {
     public DeadActorState(Actor actor) : base(actor)
+    { }
+}
+
+public class EndedTurnActorState : ActorState
+{
+    public EndedTurnActorState(Actor actor) : base(actor)
     { }
 }

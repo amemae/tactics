@@ -34,9 +34,6 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(1))
-        {
-            Debug.Log(MouseManager.GetMousePosition());
-        }
+        GameLoopManager.Instance.ExecuteTurn();
     }
 }

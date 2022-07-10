@@ -6,39 +6,35 @@ using System;
 public abstract class Actor : MonoBehaviour
 {
     ActorState _actorState;
-    MoveAction _moveAction;
 
     public void Start()
     {
         _actorState = new AwaitCommandActorState(this);    
     }
 
-    private Vector2 CalcNextPosition()
+    public void Move(Vector2 mousePos)
     {
-        throw new System.NotImplementedException();
+        MoveAction moveAct = new MoveAction(mousePos);
+        moveAct.Execute(this);
     }
 
-    public void Move()
-    {
-        _moveAction = new MoveAction(CalcNextPosition());
-        _moveAction.Execute(this);
-    }
+    public abstract void Act();
 
-    public void Act()
+    protected void OnActionKey()
     {
-        ActionList actions = new ActionList();
-        QueueActions(ref actions);
-        foreach (Action action in actions)
-        {
-            action.Invoke();
-        }
+        _actorState.OnAction();
     }
 
     public virtual void QueueActions(ref ActionList actions)
     {
         actions.AddRangeAction(new List<Action>()
         {
-            Move,
+            
         });
+    }
+
+    public bool IsTurnEnded()
+    {
+        return _actorState is EndedTurnActorState;
     }
 }
