@@ -10,7 +10,7 @@ public abstract class Actor : MonoBehaviour
 
     public void Start()
     {
-        _actorState = new AwaitCommandActorState();    
+        _actorState = new AwaitCommandActorState(this);    
     }
 
     private Vector2 CalcNextPosition()
