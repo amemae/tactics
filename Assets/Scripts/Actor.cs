@@ -12,9 +12,9 @@ public abstract class Actor : MonoBehaviour
         _actorState = new AwaitCommandActorState(this);    
     }
 
-    public void Move(Vector2 mousePos)
+    public void Move(Vector2 destPos)
     {
-        MoveAction moveAct = new MoveAction(mousePos);
+        MoveAction moveAct = new MoveAction(destPos);
         moveAct.Execute(this);
     }
 

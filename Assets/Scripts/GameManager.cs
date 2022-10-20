@@ -6,9 +6,9 @@ public class GameManager : MonoBehaviour
 {
     private static GameManager _instance;
     private InitiativeList _initiativeList;
+    [SerializeField] private GridController _grid;
 
     public Actor _TESTACTOR;
-
 
     public static GameManager Instance
     {
@@ -27,6 +27,11 @@ public class GameManager : MonoBehaviour
     public InitiativeList InitiativeList
     {
         get { return _initiativeList; }
+    }
+
+    public GridController Grid
+    {
+        get { return _grid; }
     }
 
     private void Awake()

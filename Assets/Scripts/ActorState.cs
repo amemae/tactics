@@ -38,7 +38,9 @@ public class AwaitCommandActorState : ActorState
 
     public override void OnAction()
     {
-
+        Vector2 destPos = MouseManager.GetMousePosition();
+        Vector2 destGridTile = GameManager.Instance.Grid.GetTileCenterPosition(destPos);
+        _actor.Move(destGridTile);
     }
 }
 
