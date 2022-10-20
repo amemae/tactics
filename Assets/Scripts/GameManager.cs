@@ -39,7 +39,7 @@ public class GameManager : MonoBehaviour
         _instance = this;
         _initiativeList = new InitiativeList();
 
-        Actor actor = Instantiate(_TESTACTOR);
+        Actor actor = Instantiate(_TESTACTOR, new Vector2(.5f, .5f), Quaternion.identity);
         _initiativeList.Insert(actor);
     }
 
