@@ -35,7 +35,12 @@ public class CircularList<T>
             throw new System.InvalidOperationException("Cannot insert duplicate data into list");
         }
 
-        _list.Insert(CalcInsertionIndex(), data);
+        int insertionIndex = CalcInsertionIndex();
+        if (insertionIndex == 0)
+        {
+            _headIndex = 0;
+        }
+        _list.Insert(insertionIndex, data);
     }
 
     public void Remove(T data)

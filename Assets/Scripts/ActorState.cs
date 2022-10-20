@@ -5,10 +5,17 @@ using UnityEngine;
 public abstract class ActorState
 {
     protected Actor _actor;
+    protected ActorState _state;
 
     public ActorState(Actor actor)
     {
         _actor = actor;
+        _state = this;
+    }
+
+    public virtual void ChangeState(ActorState newState)
+    {
+        _state = newState;
     }
 
     public virtual void OnAction()
@@ -25,19 +32,22 @@ public abstract class ActorState
 public class AwaitCommandActorState : ActorState
 {
     public AwaitCommandActorState(Actor actor) : base(actor)
-    { }
+    {
+        _state = this;
+    }
 
     public override void OnAction()
     {
-        Vector2 mousePos = MouseManager.GetCenteredMousePosition();
-        _actor.Move(mousePos);
+
     }
 }
 
 public class CannotActActorState : ActorState
 {
     public CannotActActorState(Actor actor) : base(actor)
-    { }
+    {
+        _state = this;
+    }
 
     public override void OnAction()
     {
@@ -48,11 +58,15 @@ public class CannotActActorState : ActorState
 public class DeadActorState : ActorState
 {
     public DeadActorState(Actor actor) : base(actor)
-    { }
+    {
+        _state = this;
+    }
 }
 
 public class EndedTurnActorState : ActorState
 {
     public EndedTurnActorState(Actor actor) : base(actor)
-    { }
+    {
+        _state = this;
+    }
 }

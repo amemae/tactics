@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerActor : Actor
 {
-    public override void Act()
+    protected override void PerformAction()
     {
         if (Input.GetMouseButtonDown(1))
         {

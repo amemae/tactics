@@ -6,7 +6,7 @@ public class InitiativeList
 {
     private CircularList<Actor> _list;
 
-    private void Start()
+    public InitiativeList()
     {
         _list = new CircularList<Actor>();
     }

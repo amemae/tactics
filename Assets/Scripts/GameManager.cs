@@ -7,6 +7,9 @@ public class GameManager : MonoBehaviour
     private static GameManager _instance;
     private InitiativeList _initiativeList;
 
+    public Actor _TESTACTOR;
+
+
     public static GameManager Instance
     {
         get
@@ -30,6 +33,9 @@ public class GameManager : MonoBehaviour
     {
         _instance = this;
         _initiativeList = new InitiativeList();
+
+        Actor actor = Instantiate(_TESTACTOR);
+        _initiativeList.Insert(actor);
     }
 
     private void Update()

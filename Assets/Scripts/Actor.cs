@@ -18,7 +18,16 @@ public abstract class Actor : MonoBehaviour
         moveAct.Execute(this);
     }
 
-    public abstract void Act();
+    public IEnumerator Act()
+    {
+        while (IsTurnEnded() == false)
+        {
+            PerformAction();
+            yield return null;
+        }
+    }
+
+    protected abstract void PerformAction();
 
     protected void OnActionKey()
     {
@@ -29,12 +38,16 @@ public abstract class Actor : MonoBehaviour
     {
         actions.AddRangeAction(new List<Action>()
         {
-            
         });
     }
 
-    public bool IsTurnEnded()
+    private bool IsTurnEnded()
     {
         return _actorState is EndedTurnActorState;
+    }
+
+    public void ChangeState(ActorState newState)
+    {
+        _actorState.ChangeState(newState);
     }
 }

@@ -5,6 +5,7 @@ using UnityEngine;
 public class GameLoopManager : MonoBehaviour
 {
     private static GameLoopManager _instance;
+    private Actor _currActor;
 
     public static GameLoopManager Instance
     {
@@ -27,13 +28,20 @@ public class GameLoopManager : MonoBehaviour
 
     public void ExecuteTurn()
     {
-        Actor currActor = GameManager.Instance.InitiativeList.Current();
+        SetupTurn();
+        StartCoroutine(_currActor.Act());           
+        EndTurn();
+    }
 
-        while (currActor.IsTurnEnded() == false)
-        {
-            currActor.Act();
-        }
+    private void SetupTurn()
+    {
+        _currActor = GameManager.Instance.InitiativeList.Current();
+        _currActor.ChangeState(new AwaitCommandActorState(_currActor));
+    }
 
+    private void EndTurn()
+    {
+        _currActor.ChangeState(new EndedTurnActorState(_currActor));
         GameManager.Instance.InitiativeList.Advance();
     }
 }
