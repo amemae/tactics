@@ -36,12 +36,10 @@ public class GameLoopManager : MonoBehaviour
     private void SetupTurn()
     {
         _currActor = GameManager.Instance.InitiativeList.Current();
-        _currActor.ChangeState(new AwaitCommandActorState(_currActor));
     }
 
     private void EndTurn()
     {
-        _currActor.ChangeState(new EndedTurnActorState(_currActor));
         GameManager.Instance.InitiativeList.Advance();
     }
 }

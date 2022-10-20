@@ -8,7 +8,13 @@ public class PlayerActor : Actor
     {
         if (Input.GetMouseButtonDown(1))
         {
-            OnActionKey();
+            Move(CalcMovePosition());
         }
+    }
+
+    private Vector2 CalcMovePosition()
+    {
+        Vector2 destPos = MouseManager.GetMousePosition();
+        return GameManager.Instance.Grid.GetTileCenterPosition(destPos);
     }
 }

@@ -5,13 +5,6 @@ using System;
 
 public abstract class Actor : MonoBehaviour
 {
-    ActorState _actorState;
-
-    public void Start()
-    {
-        _actorState = new AwaitCommandActorState(this);    
-    }
-
     public void Move(Vector2 destPos)
     {
         MoveAction moveAct = new MoveAction(destPos);
@@ -29,11 +22,6 @@ public abstract class Actor : MonoBehaviour
 
     protected abstract void PerformAction();
 
-    protected void OnActionKey()
-    {
-        _actorState.OnAction();
-    }
-
     public virtual void QueueActions(ref ActionList actions)
     {
         actions.AddRangeAction(new List<Action>()
@@ -43,11 +31,6 @@ public abstract class Actor : MonoBehaviour
 
     private bool IsTurnEnded()
     {
-        return _actorState is EndedTurnActorState;
-    }
-
-    public void ChangeState(ActorState newState)
-    {
-        _actorState.ChangeState(newState);
+        return false;
     }
 }
