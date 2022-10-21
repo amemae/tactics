@@ -5,6 +5,7 @@ using System;
 
 public abstract class Actor : MonoBehaviour
 {
+    [SerializeField] protected int _maxMoveDistance;
     public void Move(Vector2 destPos)
     {
         MoveAction moveAct = new MoveAction(destPos);
