@@ -5,10 +5,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     private static GameManager _instance;
-    private InitiativeList _initiativeList;
     [SerializeField] private GridController _grid;
-
-    public Actor _TESTACTOR;
 
     public static GameManager Instance
     {
@@ -24,11 +21,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public InitiativeList InitiativeList
-    {
-        get { return _initiativeList; }
-    }
-
     public GridController Grid
     {
         get { return _grid; }
@@ -37,14 +29,13 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         _instance = this;
-        _initiativeList = new InitiativeList();
-
-        Actor actor = Instantiate(_TESTACTOR, new Vector2(.5f, .5f), Quaternion.identity);
-        _initiativeList.Insert(actor);
+       
     }
 
-    private void Update()
+    private bool test = false;
+
+    private void Start()
     {
-        GameLoopManager.Instance.ExecuteTurn();
+        GameLoopManager.Instance.BeginGameLoop();
     }
 }

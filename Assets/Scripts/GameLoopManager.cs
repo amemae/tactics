@@ -5,7 +5,11 @@ using UnityEngine;
 public class GameLoopManager : MonoBehaviour
 {
     private static GameLoopManager _instance;
+    private InitiativeList _initiativeList;
     private Actor _currActor;
+    private bool _turnActive = false;
+
+    public Actor _TESTACTOR;
 
     public static GameLoopManager Instance
     {
@@ -24,22 +28,35 @@ public class GameLoopManager : MonoBehaviour
     private void Awake()
     {
         _instance = this;
+
+        /******************* Test Code ***********************/
+        _initiativeList = new InitiativeList();
+
+        Actor actor = Instantiate(_TESTACTOR, new Vector2(.5f, .5f), Quaternion.identity);
+        _initiativeList.Insert(actor);
+    }
+
+    public void BeginGameLoop()
+    {
+        ExecuteTurn();
     }
 
     public void ExecuteTurn()
     {
         SetupTurn();
-        StartCoroutine(_currActor.Act());           
+        StartCoroutine(_currActor.TakeTurn());
         EndTurn();
     }
 
     private void SetupTurn()
     {
-        _currActor = GameManager.Instance.InitiativeList.Current();
+        _currActor = _initiativeList.Current();
     }
+
+    
 
     private void EndTurn()
     {
-        GameManager.Instance.InitiativeList.Advance();
+        _initiativeList.Advance();
     }
 }

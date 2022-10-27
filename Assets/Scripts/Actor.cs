@@ -6,15 +6,24 @@ using System;
 public abstract class Actor : MonoBehaviour
 {
     [SerializeField] protected int _maxMoveDistance;
+    [SerializeField] protected int _maxActionPoints;
+    [SerializeField] protected int _currActionPoints;
     public void Move(Vector2 destPos)
     {
         MoveAction moveAct = new MoveAction(destPos);
         moveAct.Execute(this);
     }
 
-    public IEnumerator Act()
+    public IEnumerator TakeTurn()
     {
-        while (IsTurnEnded() == false)
+        StartTurn();
+
+        if (_currActionPoints <= _maxActionPoints)
+        {
+
+        }
+
+        while (_currActionPoints > 0)
         {
             PerformAction();
             yield return null;
@@ -30,8 +39,16 @@ public abstract class Actor : MonoBehaviour
         });
     }
 
-    private bool IsTurnEnded()
+    private void StartTurn()
     {
-        return false;
+        RestoreActionPointsAtTurnStart();
+    }
+
+    protected void RestoreActionPointsAtTurnStart()
+    {
+        if (_currActionPoints < _maxActionPoints)
+        {
+            _currActionPoints = _maxActionPoints;
+        }
     }
 }
