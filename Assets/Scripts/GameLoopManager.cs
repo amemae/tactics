@@ -7,7 +7,7 @@ public class GameLoopManager : MonoBehaviour
     private static GameLoopManager _instance;
     private InitiativeList _initiativeList;
     private Actor _currActor;
-    private bool _turnActive = false;
+    private bool _loopIsReadyToAdvance;
 
     public Actor _TESTACTOR;
 
@@ -28,6 +28,7 @@ public class GameLoopManager : MonoBehaviour
     private void Awake()
     {
         _instance = this;
+        _loopIsReadyToAdvance = true;
 
         /******************* Test Code ***********************/
         _initiativeList = new InitiativeList();
@@ -36,9 +37,17 @@ public class GameLoopManager : MonoBehaviour
         _initiativeList.Insert(actor);
     }
 
-    public void BeginGameLoop()
+    private void Update()
     {
-        StartCoroutine(ExecuteTurn());
+        AdvanceGameLoop();
+    }
+
+    public void AdvanceGameLoop()
+    {
+        if (_loopIsReadyToAdvance)
+        {
+            StartCoroutine(ExecuteTurn());
+        }
     }
 
     public IEnumerator ExecuteTurn()
@@ -56,6 +65,7 @@ public class GameLoopManager : MonoBehaviour
 
     private void SetupTurn()
     {
+        _loopIsReadyToAdvance = false;
         _currActor = _initiativeList.Current();
         _currActor.StartTurn();
     }
@@ -65,5 +75,6 @@ public class GameLoopManager : MonoBehaviour
     private void EndTurn()
     {
         _initiativeList.Advance();
+        _loopIsReadyToAdvance = true;
     }
 }

@@ -31,9 +31,4 @@ public class GameManager : MonoBehaviour
         _instance = this;
        
     }
-
-    private void Start()
-    {
-        GameLoopManager.Instance.BeginGameLoop();
-    }
 }
