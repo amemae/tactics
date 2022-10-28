@@ -38,19 +38,26 @@ public class GameLoopManager : MonoBehaviour
 
     public void BeginGameLoop()
     {
-        ExecuteTurn();
+        StartCoroutine(ExecuteTurn());
     }
 
-    public void ExecuteTurn()
+    public IEnumerator ExecuteTurn()
     {
         SetupTurn();
-        StartCoroutine(_currActor.TakeTurn());
+
+        while (_currActor.IsTakingTurn)
+        {
+            _currActor.TakeTurn();
+            yield return null;
+        }
+
         EndTurn();
     }
 
     private void SetupTurn()
     {
         _currActor = _initiativeList.Current();
+        _currActor.StartTurn();
     }
 
     

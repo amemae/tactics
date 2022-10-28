@@ -8,25 +8,26 @@ public abstract class Actor : MonoBehaviour
     [SerializeField] protected int _maxMoveDistance;
     [SerializeField] protected int _maxActionPoints;
     [SerializeField] protected int _currActionPoints;
+    protected bool _isTakingTurn;
+
+    public bool IsTakingTurn
+    {
+        get { return _isTakingTurn; }
+    }
+
     public void Move(Vector2 destPos)
     {
         MoveAction moveAct = new MoveAction(destPos);
         moveAct.Execute(this);
     }
 
-    public IEnumerator TakeTurn()
+    public void TakeTurn()
     {
-        StartTurn();
+        PerformAction();
 
-        if (_currActionPoints <= _maxActionPoints)
+        if (_currActionPoints <= 0)
         {
-
-        }
-
-        while (_currActionPoints > 0)
-        {
-            PerformAction();
-            yield return null;
+            EndTurn();
         }
     }
 
@@ -39,9 +40,10 @@ public abstract class Actor : MonoBehaviour
         });
     }
 
-    private void StartTurn()
+    public void StartTurn()
     {
         RestoreActionPointsAtTurnStart();
+        _isTakingTurn = true;
     }
 
     protected void RestoreActionPointsAtTurnStart()
@@ -50,5 +52,9 @@ public abstract class Actor : MonoBehaviour
         {
             _currActionPoints = _maxActionPoints;
         }
+    }
+    protected void EndTurn()
+    {
+        _isTakingTurn = false;
     }
 }
