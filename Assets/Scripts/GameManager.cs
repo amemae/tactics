@@ -32,8 +32,6 @@ public class GameManager : MonoBehaviour
        
     }
 
-    private bool test = false;
-
     private void Start()
     {
         GameLoopManager.Instance.BeginGameLoop();
