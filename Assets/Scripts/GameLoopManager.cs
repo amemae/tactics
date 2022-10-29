@@ -10,6 +10,7 @@ public class GameLoopManager : MonoBehaviour
     private bool _loopIsReadyToAdvance;
 
     public Actor _TESTACTOR;
+    public Actor _TESTACTOR2;
 
     public static GameLoopManager Instance
     {
@@ -34,6 +35,8 @@ public class GameLoopManager : MonoBehaviour
         _initiativeList = new InitiativeList();
 
         Actor actor = Instantiate(_TESTACTOR, new Vector2(.5f, .5f), Quaternion.identity);
+        _initiativeList.Insert(actor);
+        actor = Instantiate(_TESTACTOR2, new Vector2(-.5f, -.5f), Quaternion.identity);
         _initiativeList.Insert(actor);
     }
 
