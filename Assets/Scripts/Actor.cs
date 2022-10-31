@@ -28,7 +28,10 @@ public abstract class Actor : MonoBehaviour
 
     public void TakeTurn()
     {
-        PerformAction();
+        if (IsTryingToAct())
+        {
+            PerformAction();
+        }
 
         if (_currActionPoints <= 0)
         {
@@ -36,7 +39,10 @@ public abstract class Actor : MonoBehaviour
         }
     }
 
-    protected abstract void PerformAction();
+    private void PerformAction()
+    {
+        GameManager.Instance.ActionMenu.Display();
+    }
 
     public virtual void QueueActions(ref ActionList actions)
     {
@@ -68,4 +74,6 @@ public abstract class Actor : MonoBehaviour
     {
         --_currActionPoints;
     }
+
+    protected abstract bool IsTryingToAct();
 }

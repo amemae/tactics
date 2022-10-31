@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class PlayerActor : Actor
 {
-    protected override void PerformAction()
+    protected override bool IsTryingToAct()
     {
         if (Input.GetMouseButtonDown(1))
         {
-            GameManager.Instance.ActionMenu.Display();
+            return true;
         }
+        return false;
     }
 }
