@@ -9,6 +9,7 @@ public abstract class Actor : MonoBehaviour
     [SerializeField] protected int _maxActionPoints;
     [SerializeField] protected int _currActionPoints;
     protected bool _isTakingTurn;
+    protected BoxCollider2D _collider;
 
     public bool IsTakingTurn
     {
@@ -18,6 +19,11 @@ public abstract class Actor : MonoBehaviour
     public int MaxMoveDistance
     {
         get { return _maxMoveDistance; }
+    }
+
+    private void Start()
+    {
+        _collider = gameObject.AddComponent<BoxCollider2D>();    
     }
 
     public void Move(Vector2 destPos)
