@@ -21,6 +21,11 @@ public class MoveButton : ActionMenuButton
             return false;
         }
 
+        if (DoesMovePosCollideWithOtherActor())
+        {
+            return false;
+        }
+
         return true;
     }
 
@@ -43,6 +48,18 @@ public class MoveButton : ActionMenuButton
         Vector2 currentTile = GameManager.Instance.Grid.GetTileCenterPosition(_actingActor.transform.position);
 
         if (_actionPosition == currentTile)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    private bool DoesMovePosCollideWithOtherActor()
+    {
+        RaycastHit2D hit = Physics2D.Raycast(_actionPosition, _actionPosition);
+
+        if (hit)
         {
             return true;
         }
