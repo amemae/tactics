@@ -15,6 +15,11 @@ public abstract class Actor : MonoBehaviour
         get { return _isTakingTurn; }
     }
 
+    public int MaxMoveDistance
+    {
+        get { return _maxMoveDistance; }
+    }
+
     public void Move(Vector2 destPos)
     {
         MoveAction moveAct = new MoveAction(destPos);
@@ -53,8 +58,14 @@ public abstract class Actor : MonoBehaviour
             _currActionPoints = _maxActionPoints;
         }
     }
+
     protected void EndTurn()
     {
         _isTakingTurn = false;
+    }
+
+    public void SpendActionPoints(int actionPointCost)
+    {
+        --_currActionPoints;
     }
 }

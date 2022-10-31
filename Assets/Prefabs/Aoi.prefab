@@ -46,6 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxMoveDistance: 1
   _maxActionPoints: 3
+  _currActionPoints: 3
 --- !u!212 &3266845668440828445
 SpriteRenderer:
   m_ObjectHideFlags: 0

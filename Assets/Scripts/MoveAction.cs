@@ -5,13 +5,19 @@ using UnityEngine;
 public class MoveAction : ActionCommand
 {
     Vector2 _destPost;
+
+    protected override int GetActionPointCost()
+    {
+        return 1;
+    }
+
     public MoveAction(Vector2 destPos)
     {
         _destPost = destPos;
     }
 
-    public override void Execute(Actor actor)
+    protected override void Execute()
     {
-        actor.transform.position = _destPost;
+        _actor.transform.position = _destPost;
     }
 }

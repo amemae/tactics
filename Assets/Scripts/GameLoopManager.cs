@@ -31,9 +31,9 @@ public class GameLoopManager : MonoBehaviour
         _instance = this;
         _loopIsReadyToAdvance = true;
 
-        /******************* Test Code ***********************/
         _initiativeList = new InitiativeList();
 
+        /******************* Test Code ***********************/
         Actor actor = Instantiate(_TESTACTOR, new Vector2(.5f, .5f), Quaternion.identity);
         _initiativeList.Insert(actor);
         actor = Instantiate(_TESTACTOR2, new Vector2(-.5f, -.5f), Quaternion.identity);
@@ -73,11 +73,14 @@ public class GameLoopManager : MonoBehaviour
         _currActor.StartTurn();
     }
 
-    
-
     private void EndTurn()
     {
         _initiativeList.Advance();
         _loopIsReadyToAdvance = true;
+    }
+
+    public Actor CurrentActor()
+    {
+        return _initiativeList.Current();
     }
 }

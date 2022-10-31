@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour
 {
     private static GameManager _instance;
     [SerializeField] private GridController _grid;
+    [SerializeField] private ActionMenu _actionMenu;
 
     public static GameManager Instance
     {
@@ -26,9 +27,13 @@ public class GameManager : MonoBehaviour
         get { return _grid; }
     }
 
+    public ActionMenu ActionMenu
+    {
+        get { return _actionMenu; }
+    }
+
     private void Awake()
     {
         _instance = this;
-       
     }
 }

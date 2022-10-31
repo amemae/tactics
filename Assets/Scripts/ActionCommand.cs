@@ -4,5 +4,17 @@ using UnityEngine;
 
 public abstract class ActionCommand
 {
-    public abstract void Execute(Actor actor);
+    protected Actor _actor;
+
+    protected abstract int GetActionPointCost();
+
+    public void Execute(Actor actor)
+    {
+        _actor = actor;
+        _actor.SpendActionPoints(GetActionPointCost());
+
+        Execute();
+    }
+
+    protected abstract void Execute();
 }

@@ -22,7 +22,7 @@ public class CircularList<T>
 
         if (_headIndex == 0)
         {
-            return _list.Count - 1;
+            return _list.Count;
         }
 
         return _headIndex.Value - 1;
