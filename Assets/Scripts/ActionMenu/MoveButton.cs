@@ -57,7 +57,7 @@ public class MoveButton : ActionMenuButton
 
     private bool DoesMovePosCollideWithOtherActor()
     {
-        RaycastHit2D hit = Physics2D.Raycast(_actionPosition, _actionPosition);
+        RaycastHit2D hit = Physics2D.Raycast(_actionPosition, Vector2.zero);
 
         if (hit)
         {
